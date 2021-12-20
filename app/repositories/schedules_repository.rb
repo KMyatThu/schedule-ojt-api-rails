@@ -6,7 +6,7 @@ class SchedulesRepository
   
   # Create Schedules
   def self.createSchedules(logged_in_user_id, schedules)
-    Schedule.where(created_user_id: logged_in_user_id).delete_all
+    # Schedule.where(created_user_id: logged_in_user_id).delete_all
     schedules.require(:_json).each do |value|
       schedule = Schedule.new
       schedule.calendarId = value[:calendarId]
@@ -34,5 +34,25 @@ class SchedulesRepository
       schedule.created_user_id = logged_in_user_id
       schedule.save
     end
+  end
+
+  def self.createSingleSchedule(logged_in_user_id, schedule_params)
+    schedule = Schedule.new(schedule_params)
+    schedule.created_user_id = logged_in_user_id
+    schedule.save
+  end
+
+  def self.updateSingleSchedule(schedule_params)
+    schedule = Schedule.find(schedule_params[:id])
+    schedule.update(schedule_params)
+  end
+
+  def self.deleteSingleSchedule(logged_in_user_id, schedule_id)
+    schedule = Schedule.find(schedule_id)
+    schedule.destroy
+  end
+
+  def self.deleteAllSchedules(logged_in_user_id)
+    Schedule.where(created_user_id: logged_in_user_id).delete_all
   end
 end

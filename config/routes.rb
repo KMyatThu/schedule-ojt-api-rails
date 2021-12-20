@@ -3,4 +3,7 @@ Rails.application.routes.draw do
   post "api/auth/login", to: "users#login"      #Login route
   get "api/schedules", to: "schedules#index"    #Get all Schedules
   post "api/schedules/create", to: "schedules#create" #Create Schedules
+  post "api/schedules/createSingleSchedule", to: "schedules#createSingleSchedule" #Create for Single Schedule
+  post "api/schedules/updateSingleSchedule", to: "schedules#updateSingleSchedule" #Update for Single Schedule
+  post "api/schedules/deleteSingleSchedule", to: "schedules#deleteSingleSchedule" #Delete for Single Schedule
 end
