@@ -10,7 +10,7 @@ class SchedulesController < ApplicationController
   # create schedules
   def create
     SchedulesService.deleteAllSchedules(logged_in_user.id)
-    SchedulesService.createSchedules(logged_in_user.id, params)
+    SchedulesService.createSchedules(logged_in_user.id, params) if params[:_json].length != 0
     render json: { response: "ok" }
   end
 
